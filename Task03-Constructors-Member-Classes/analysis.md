@@ -78,3 +78,14 @@ However, composition using a direct Address member is simpler when Person always
 The experiment demonstrates constructor initializer lists, composition, virtual inheritance, multiple inheritance, object construction and destruction order.
 
 Virtual inheritance eliminates duplicate Person base objects in TeachingAssistant. The sizeof experiment demonstrates the memory-layout difference between virtual and non-virtual inheritance on the tested compiler.
+## Experiment: Member Initializer List Order
+
+### Objective
+To demonstrate that C++ initializes class members in the order of their declaration rather than the order specified in the constructor initializer list.
+
+### Implementation
+The `InitializerOrder` class declares `first` before `second`, but its constructor lists `second` before `first`.
+
+### Compilation
+```bash
+g++ -std=c++17 -Wall -Wextra -Wreorder initializer_order.cpp -o initializer_order.exe
