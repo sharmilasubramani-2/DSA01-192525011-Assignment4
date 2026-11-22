@@ -130,3 +130,39 @@ Object sizes depend on compiler implementation, alignment, padding and virtual i
 ## 7. Conclusion
 
 The university management system demonstrates hierarchical, multiple, multilevel and hybrid inheritance. The diamond problem was reproduced by removing virtual inheritance and resolved by using virtual base classes. Virtual inheritance avoids duplicate Person subobjects and provides a consistent shared base-class representation.
+## 8. Experimental Object Size Comparison
+
+The sizeof() operator was used to measure the object sizes of the
+classes in both implementations.
+
+### Measured Results
+
+| Class | With Virtual Inheritance | Without Virtual Inheritance |
+|---|---:|---:|
+| Person | 80 bytes | 80 bytes |
+| Student | 128 bytes | 120 bytes |
+| Staff | 128 bytes | 120 bytes |
+| TeachingAssistant | 176 bytes | 240 bytes |
+| ResearchScholar | 136 bytes | 128 bytes |
+
+### Analysis
+
+The TeachingAssistant object occupies 176 bytes with virtual
+inheritance and 240 bytes without virtual inheritance.
+
+The 64-byte difference demonstrates the memory impact of duplicate
+Person subobjects in the non-virtual implementation.
+
+Student and Staff objects are slightly larger with virtual inheritance
+because of compiler-specific virtual base implementation overhead.
+
+The exact object sizes depend on the compiler, architecture,
+alignment and implementation details.
+
+### Conclusion
+
+The experiment confirms that virtual inheritance avoids duplicate
+Person subobjects in TeachingAssistant. Although virtual inheritance
+may introduce additional implementation overhead in individual base
+classes, it reduces the overall TeachingAssistant object size in
+this experiment.

@@ -121,6 +121,12 @@ int main() {
     );
 
     rs.display();
+    cout << "\nOBJECT SIZE ANALYSIS\n";
+cout << "Person: " << sizeof(Person) << " bytes\n";
+cout << "Student: " << sizeof(Student) << " bytes\n";
+cout << "Staff: " << sizeof(Staff) << " bytes\n";
+cout << "TeachingAssistant: " << sizeof(TeachingAssistant) << " bytes\n";
+cout << "ResearchScholar: " << sizeof(ResearchScholar) << " bytes\n";
 
     return 0;
 }
