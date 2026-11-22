@@ -1,4 +1,4 @@
-# DSA0111 OOPS – Assignment 4
+# DSA0111 OOPS - Assignment 4
 
 ## Designing Reusable Class Hierarchies
 
@@ -8,23 +8,28 @@
 |---|---|
 | Student Name | Sharmila S |
 | Register Number | 192525011 |
-| Course | DSA0111 – OOPS |
+| Programme | B.Tech Artificial Intelligence and Machine Learning |
+| Course | DSA0111 - OOPS |
 | Course Outcome | CO4 |
 | Assignment | 4 |
 | Total Marks | 50 |
 | Programming Language | C++ |
 | Compiler | g++ 16.1.0 |
-| Standard | C++17 |
+| Language Standard | C++17 |
+
+## Assignment Overview
+
+This assignment demonstrates advanced object-oriented programming concepts through six independent C++ implementations. It focuses on reusable class design, inheritance, composition, constructors, pointers, polymorphism, and extensible class hierarchies.
 
 ## Compilation and Execution
 
-Compile each task from its respective directory:
+Navigate to the respective task directory and compile the source file:
 
 ```bash
 g++ -std=c++17 -Wall -Wextra main.cpp -o main.exe
 ```
 
-Run using PowerShell:
+Run the executable in PowerShell:
 
 ```powershell
 .\main.exe
@@ -32,33 +37,35 @@ Run using PowerShell:
 
 ## Assignment Tasks
 
-| Task | Description | Implementation Status |
+| Task | Description | Main Concepts |
 |---|---|---|
-| 1 | Class Design Review | Implemented |
-| 2 | From Requirement to Hierarchy | Implemented |
-| 3 | Constructors and Member Classes | Implemented |
-| 4 | Pointers to Derived Classes | Implemented |
-| 5 | Pointers to Objects and This Pointer | Implemented |
-| 6 | Vehicle Rental Fleet | Implemented |
-
-Implementation status does not imply that every supplementary experiment and submission document has been verified.
+| 1 | Class Design Review | Abstraction, encapsulation, inheritance, polymorphism |
+| 2 | From Requirement to Hierarchy | Multiple, hybrid and virtual inheritance |
+| 3 | Constructors and Member Classes | Constructors, destructors, composition, initializer lists |
+| 4 | Pointers to Derived Classes | Base and derived pointers, polymorphism, object slicing |
+| 5 | Pointers to Objects and This Pointer | Object pointers, references, dynamic allocation, method chaining |
+| 6 | Vehicle Rental Fleet | Abstract classes, inheritance, overriding, extensibility |
 
 ## Repository Structure
 
 ```text
 DSA01-192525011-Assignment4/
-│
-├── Task01-Class-Design-Review/
-├── Task02-Inheritance-Hierarchy/
-├── Task03-Constructors-Member-Classes/
-├── Task04-Pointers-Derived-Classes/
-├── Task05-Objects-This-Pointer/
-├── Task06-Vehicle-Rental-Fleet/
-├── Report/
-├── UML-Diagrams/
-├── .gitignore
-└── README.md
+|
+|-- Task01-Class-Design-Review/
+|-- Task02-Inheritance-Hierarchy/
+|-- Task03-Constructors-Member-Classes/
+|-- Task04-Pointers-Derived-Classes/
+|-- Task05-Objects-This-Pointer/
+|-- Task06-Vehicle-Rental-Fleet/
+|-- Report/
+|   |-- Assignment4-Report.md
+|-- UML-Diagrams/
+|   |-- Class-Diagrams.md
+|-- .gitignore
+|-- README.md
 ```
+
+Each task directory contains its implementation, analysis, and available output evidence. Supplementary comparison programs are included where applicable.
 
 ## Concepts Covered
 
@@ -66,21 +73,27 @@ DSA01-192525011-Assignment4/
 - Inheritance and virtual inheritance
 - Constructor and destructor execution order
 - Composition and member classes
-- Runtime polymorphism
+- Runtime polymorphism and static binding
 - Base-class and derived-class pointers
-- Virtual destructors
-- Dynamic memory management
-- Smart pointers
+- Virtual destructors and object lifetime
+- Dynamic memory management and smart pointers
+- Object slicing
 - The `this` pointer and method chaining
 - Abstract classes and pure virtual functions
 - Reusable and extensible class hierarchies
 
 ## Testing and Verification
 
-Programs are compiled using C++17 with warning flags.
+All six main programs were successfully compiled using:
 
-Execution screenshots, analysis documents, comparison experiments, UML diagrams and the final report are maintained as submission evidence.
+```bash
+g++ -std=c++17 -Wall -Wextra main.cpp -o main.exe
+```
+
+The repository includes execution screenshots, analysis documents, supplementary experiments, UML diagrams, and the final assignment report.
+
+The AddressSanitizer experiment could not be executed because the installed compiler environment did not provide the required sanitizer library.
 
 ## Repository Purpose
 
-This repository contains the source code, implementation experiments and supporting documentation for DSA0111 OOPS Assignment 4.
+This repository maintains the source code, implementation experiments, testing evidence, and supporting documentation for DSA0111 OOPS Assignment 4.
