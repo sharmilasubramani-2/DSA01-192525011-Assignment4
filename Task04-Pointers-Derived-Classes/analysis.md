@@ -1,46 +1,112 @@
 # Task 4 – Pointers to Derived Classes
 
-## 1. Problem Analysis
+## 1. Objective
 
-The original Account hierarchy contains three major design issues:
+To examine polymorphism, base-class pointers, derived-class access, object slicing, virtual destructors and safe dynamic memory management.
 
-- Non-virtual functions cause static binding through base-class pointers.
-- A non-virtual destructor can cause undefined behaviour when deleting a derived object through a base pointer.
-- Object slicing occurs when a derived object is copied into a base object by value.
+## 2. Problems in the Original Design
 
-## 2. Improved Design
+The original Account hierarchy demonstrates three important design problems.
 
-The Account class provides a virtual getInterestRate() function and a virtual destructor.
+### 2.1 Static Binding
 
-SeniorAccount overrides getInterestRate() and display(). It also manages a dynamically allocated transaction history.
+When a base-class pointer accesses a non-virtual function, the function belonging to the pointer's declared type is called.
 
-## 3. Polymorphism
+Observed output:
 
-The base Account pointer can refer to both Account and SeniorAccount objects.
+| Access | Interest Rate |
+|---|---:|
+| Base-class pointer | 3.5 |
+| Derived object | 4.0 |
 
-The virtual function ensures runtime binding.
+The base pointer calls the base-class function because the function is non-virtual.
 
-Observed interest rates:
+### 2.2 Object Slicing
+
+Object slicing occurs when a derived-class object is copied into a base-class object.
+
+```cpp
+Account sliced = senior;
+```
+
+Only the base-class portion is copied. Derived-class-specific members and behaviour are not retained.
+
+The sliced object displays the base Account interest rate of 3.5%.
+
+### 2.3 Non-Virtual Destructor
+
+The original Account destructor is non-virtual.
+
+When a dynamically allocated SeniorAccount object is deleted through an Account pointer, the derived destructor is not properly invoked.
+
+Observed destruction output for the dynamically allocated object:
+
+```text
+Account constructor called
+SeniorAccount constructor called
+Account destructor called
+```
+
+The SeniorAccount destructor is skipped, so its dynamically allocated transaction history is not released.
+
+Deleting a derived object through a base pointer with a non-virtual destructor results in undefined behaviour.
+
+## 3. Improved Design
+
+The corrected implementation in `main.cpp` uses:
+
+- Virtual `getInterestRate()` function.
+- Virtual `display()` function.
+- Virtual base-class destructor.
+- Function overriding in SeniorAccount.
+- Dynamic memory release using `delete[]`.
+
+These changes support runtime polymorphism and safe destruction through base-class pointers.
+
+## 4. Polymorphism
+
+The Account pointer can refer to both Account and SeniorAccount objects.
+
+Virtual functions ensure that the correct derived implementation is selected at runtime.
 
 | Object | Interest Rate |
 |---|---:|
 | Account | 3.5% |
 | SeniorAccount | 4.0% |
 
-## 4. Virtual Destructor
+## 5. Virtual Destructor
 
-The virtual destructor ensures that the derived class destructor executes before the base class destructor when an object is deleted through a base-class pointer.
+The corrected implementation declares the Account destructor as virtual.
 
-Observed destruction order:
+When an object is deleted through an Account pointer, the derived destructor executes first, followed by the base destructor.
 
-SeniorAccount destructor → Account destructor
+Expected destruction order:
 
-## 5. Dynamic Memory Management
+```text
+SeniorAccount destructor called
+Account destructor called
+```
 
-SeniorAccount allocates transaction history dynamically using new[] and releases it using delete[].
+## 6. Dynamic Memory Management
 
-The implementation also demonstrates std::unique_ptr, which automatically manages object lifetime and prevents memory leaks.
+SeniorAccount allocates its transaction history using `new[]` and releases it using `delete[]`.
 
-## 6. Conclusion
+The corrected implementation also demonstrates `std::unique_ptr`, which automatically manages object lifetime.
 
-The experiment demonstrates runtime polymorphism, base-class pointers, function overriding, virtual destructors and dynamic memory management. Smart pointers provide safer resource management in an inheritance hierarchy.
+## 7. AddressSanitizer Experiment
+
+Compilation was attempted using:
+
+```bash
+g++ -std=c++17 -Wall -Wextra -fsanitize=address -g unsafe_demo.cpp -o unsafe_demo.exe
+```
+
+The compilation failed because the installed MinGW environment could not locate the AddressSanitizer library `libasan`.
+
+Therefore, no AddressSanitizer runtime report was obtained. The limitation is documented rather than treating the experiment as successfully completed.
+
+## 8. Conclusion
+
+The experiment demonstrates static binding, object slicing, unsafe base-pointer deletion, runtime polymorphism, virtual destructors and dynamic memory management.
+
+The corrected inheritance design uses virtual functions and smart pointers to improve safety, extensibility and resource management.
